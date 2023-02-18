@@ -23,13 +23,17 @@ def player(board):
     """
     Returns player who has the next turn on a board.
     """
-    x_cells, o_cells, empty_cells = 0, 0, 0
+    x_cells, o_cells = 0, 0
 
-    for row in board:
-        # Count EACH X, 0, EMPTY cell in board
-        x_cells += row.count(X)
-        o_cells += row.count(O)
-        empty_cells += row.count(EMPTY)
+    rows = len(board)
+    cols = len(board[0])
+
+    for row in range(rows):
+        for col in range(cols):
+            if board[row][col] == X:
+                x_cells += 1
+            if board[row][col] == O:
+                o_cells += 1
 
     # O's turn if num of X cells > O cells
     # Otherwise, X's turn
