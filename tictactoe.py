@@ -28,6 +28,8 @@ def player(board):
     rows = len(board)
     cols = len(board[0])
 
+    # Loop through each cell of the board
+    # and count each X and O cell
     for row in range(rows):
         for col in range(cols):
             if board[row][col] == X:
