@@ -64,6 +64,7 @@ def result(board, action):
     """
     possible_actions = actions(board)
     if action not in possible_actions:
+        # Invalid action was passed in
         raise Exception(f'{action} is not a valid action.')
 
     row, col = action
