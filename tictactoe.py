@@ -159,15 +159,21 @@ def terminal(board):
             
      # if there are no more empty cells; theres a tie and game's over 
     return True 
-        
-    raise NotImplementedError
 
 
 def score(board):
     """
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
     """
-    raise NotImplementedError
+    
+    winner = winner(board) 
+    
+    if winner == X: 
+        return 1
+    elif winner == O: 
+        return -1 
+    else: 
+        return 0
 
 
 def minimax(board):
