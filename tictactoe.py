@@ -151,10 +151,10 @@ def terminal(board):
     if winner(board) != None: 
         return True 
     
-    #checking if there are any empty cells
+    #checking if there are any empty cells; if so, return false - game still in progress
     for row in range(3): 
         for col in range(3): 
-            id board[row][col] == EMPTY:
+            if board[row][col] == EMPTY:
                 return False
             
      # if there are no more empty cells; theres a tie and game's over 
