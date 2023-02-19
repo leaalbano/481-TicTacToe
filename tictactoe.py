@@ -88,6 +88,7 @@ def check_rows(board):
             # all columns in the row are EMPTY. So this is why this works.
             if board[row][0] != EMPTY:
                 return board[row][0]
+
     return False
 
 
@@ -99,6 +100,7 @@ def check_cols(board):
             # all cells in the column are EMPTY. So this is why this works.
             if board[0][col] != EMPTY:
                 return board[0][col]
+
     return False
 
 
@@ -115,6 +117,7 @@ def check_diagonals(board):
     if board[2][0] == board[1][1] == board[0][2]:
         if board[2][0] != EMPTY:
             return board[2][0]
+
     return False
 
 
