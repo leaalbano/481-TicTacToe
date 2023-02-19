@@ -146,6 +146,20 @@ def terminal(board):
     """
     Returns True if game is over, False otherwise.
     """
+    
+    #checking if there is a winner
+    if winner(board) != None: 
+        return True 
+    
+    #checking if there are any empty cells
+    for row in range(3): 
+        for col in range(3): 
+            id board[row][col] == EMPTY:
+                return False
+            
+     # if there are no more empty cells; theres a tie and game's over 
+    return True 
+        
     raise NotImplementedError
 
 
