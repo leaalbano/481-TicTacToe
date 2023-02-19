@@ -80,11 +80,63 @@ def result(board, action):
     return copy_of_board
 
 
+def check_rows(board):
+    rows = len(board)
+    for row in range(rows):
+        if board[row][0] == board[row][1] == board[row][2]:
+            # Automatically, we know all are the same. So if one is EMPTY
+            # all columns in the row are EMPTY. So this is why this works.
+            if board[row][0] != EMPTY:
+                return board[row][0]
+    return False
+
+
+def check_cols(board):
+    cols = len(board)
+    for col in range(cols):
+        if board[0][col] == board[1][col] == board[2][col]:
+            # Automatically, we know all are the same. So if one is EMPTY
+            # all cells in the column are EMPTY. So this is why this works.
+            if board[0][col] != EMPTY:
+                return board[0][col]
+    return False
+
+
+def check_diagonals(board):
+    # Once again, we know if there is a diagonal member
+    # then the diagonal will either be all X or all Y
+
+    # Thus, we can safely check if the first one we check
+    # (board[0][0] or board[2][0]) is not EMPTY and be
+    # assured all else in the current diagonal != empty
+    if board[0][0] == board[1][1] == board[2][2]:
+        if board[0][0] != EMPTY:
+            return board[0][0]
+    if board[2][0] == board[1][1] == board[0][2]:
+        if board[2][0] != EMPTY:
+            return board[2][0]
+    return False
+
+
 def winner(board):
     """
     Returns the winner of the game, if there is one.
     """
-    raise NotImplementedError
+
+    # Each should return the winner, or False if no winner
+    horizontal_winner = check_rows(board)
+    if horizontal_winner:
+        return horizontal_winner
+
+    vertical_winner = check_cols(board)
+    if vertical_winner:
+        return vertical_winner
+
+    diagonal_winner = check_diagonals(board)
+    if diagonal_winner:
+        return diagonal_winner
+
+    return None
 
 
 def terminal(board):
