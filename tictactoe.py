@@ -180,4 +180,18 @@ def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
+
+    """
+    psuedocode:
+
+    def max_function(state):
+        score = max(score, min_function(results(state, actions)))
+            return score
+		
+	def min_function(state):
+        score
+
+    """
+
+
     raise NotImplementedError
