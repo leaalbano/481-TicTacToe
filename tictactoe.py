@@ -174,7 +174,6 @@ def score(board):
         return 0
 
 
-
 def max_value(board):
    
     if terminal(board):
@@ -195,9 +194,9 @@ def min_value(board):
     return v
 
 def minimax(board):
-    """
+   """
     Returns the optimal action for the current player on the board.
-    """
+"""
     if terminal(board):
         return None
 
