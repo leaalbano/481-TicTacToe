@@ -88,7 +88,7 @@ def winner(board):
     for row in range(rows):
         if board[row][0] == board[row][1] == board[row][2]:
             # Automatically, we know all are the same. So if one is EMPTY
-            # all columns in the row are EMPTY. So this is why this works.
+            # all cells in the row are EMPTY. So this is why this works.
             if board[row][0] != EMPTY:
                 return board[row][0]  # Returns X or O
 
@@ -100,7 +100,7 @@ def winner(board):
             if board[0][col] != EMPTY:
                 return board[0][col]  # Returns X or O
 
-    # Once again, we know if there is a diagonal member
+    # Once again, we know if there is a diagonal winner
     # then the diagonal will either be all X or all Y
     if board[0][0] == board[1][1] == board[2][2]:
         if board[0][0] != EMPTY:
