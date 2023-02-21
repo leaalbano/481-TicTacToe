@@ -220,8 +220,7 @@ def minimax(board):
                 best_action = action
 
     return best_action
-
-    """
+"""
     psuedocode:
     def max_function(state):
         score = max(score, min_function(results(state, actions)))
@@ -229,4 +228,4 @@ def minimax(board):
 		
 	def min_function(state):
         return score
-    """
+"""
