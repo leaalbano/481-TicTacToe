@@ -131,7 +131,7 @@ def terminal(board):
             if board[row][col] == EMPTY:
                 return False
 
-        # if there are no more empty cells; theres a tie and game's over
+    # if there are no more empty cells; theres a tie and game's over
     return True
 
 
