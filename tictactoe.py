@@ -123,7 +123,7 @@ def terminal(board):
         return True
 
     rows = len(board)
-    cols = len(board)
+    cols = len(board[0])
 
     # checking if there are any empty cells; if so, return false - game still in progress
     for row in range(rows):
