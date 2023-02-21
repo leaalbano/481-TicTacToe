@@ -122,9 +122,12 @@ def terminal(board):
     if winner(board) != None:
         return True
 
+    rows = len(board)
+    cols = len(board)
+
     # checking if there are any empty cells; if so, return false - game still in progress
-    for row in range(3):
-        for col in range(3):
+    for row in range(rows):
+        for col in range(cols):
             if board[row][col] == EMPTY:
                 return False
 
