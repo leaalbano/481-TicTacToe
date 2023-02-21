@@ -170,6 +170,19 @@ def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
+
+    """
+    Psuedocode as described by professor:
+    
+    Def minimax(board):
+        Def max_function(state):
+            score = max(score, min_function(results(state, actions)))
+            Return score
+            
+        Def min_function(state):
+            Return score
+    """
+
     if terminal(board):
         return None
 
