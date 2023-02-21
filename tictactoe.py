@@ -146,33 +146,33 @@ def terminal(board):
     """
     Returns True if game is over, False otherwise.
     """
-    
-    #checking if there is a winner
-    if winner(board) != None: 
-        return True 
-    
-    #checking if there are any empty cells; if so, return false - game still in progress
-    for row in range(3): 
-        for col in range(3): 
+
+    # checking if there is a winner
+    if winner(board) != None:
+        return True
+
+    # checking if there are any empty cells; if so, return false - game still in progress
+    for row in range(3):
+        for col in range(3):
             if board[row][col] == EMPTY:
                 return False
-            
-     # if there are no more empty cells; theres a tie and game's over 
-    return True 
+
+     # if there are no more empty cells; theres a tie and game's over
+    return True
 
 
 def score(board):
     """
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
     """
-    
-    winner = winner(board) 
-    
-    if winner == X: 
+
+    winner = winner(board)
+
+    if winner == X:
         return 1
-    elif winner == O: 
-        return -1 
-    else: 
+    elif winner == O:
+        return -1
+    else:
         return 0
 
 
@@ -186,12 +186,11 @@ def minimax(board):
 
     def max_function(state):
         score = max(score, min_function(results(state, actions)))
-            return score
+        return score
 		
 	def min_function(state):
-        score
+        return score
 
     """
-
 
     raise NotImplementedError
