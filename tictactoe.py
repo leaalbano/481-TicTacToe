@@ -50,8 +50,8 @@ def actions(board):
 
     # Check if row, col position is empty
     # If so, add it to our possible moves set
-    for row in len(board):
-        for col in len(board[0]):
+    for row in range(len(board)):
+        for col in range(len(board[0])):
             if board[row][col] == EMPTY:
                 possible_actions.add((row, col))
 
@@ -166,18 +166,57 @@ def score(board):
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
     """
     
-    winner = winner(board) 
     
-    if winner == X: 
+    if winner(board) == X: 
         return 1
-    elif winner == O: 
+    elif winner(board) == O: 
         return -1 
     else: 
         return 0
 
 
+
+def max_value(board):
+   
+    if terminal(board):
+        return score(board)
+    v = -math.inf
+
+    for action in actions(board):
+        v = max(v, min_value(result(board, action)))
+    return v
+
+def min_value(board):
+    if terminal(board):
+        return score(board)
+    v = math.inf
+
+    for action in actions(board):
+        v = min(v, max_value(result(board, action)))
+    return v
+
 def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
-    raise NotImplementedError
+    if terminal(board):
+        return None
+
+    best_action = None
+
+    if player(board) == X:
+        max_v = -math.inf
+        for action in actions(board):
+            v = min_value(result(board, action))
+            if v > max_v:
+                max_v = v
+                best_action = action
+    else:
+        min_v = math.inf
+        for action in actions(board):
+            v = max_value(result(board, action))
+            if v < min_v:
+                min_v = v
+                best_action = action
+
+    return best_action
