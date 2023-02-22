@@ -80,64 +80,35 @@ def result(board, action):
     return copy_of_board
 
 
-def check_rows(board):
+def winner(board):
+    """
+    Returns the winner of the game, if there is one.
+    """
     rows = len(board)
     for row in range(rows):
         if board[row][0] == board[row][1] == board[row][2]:
             # Automatically, we know all are the same. So if one is EMPTY
-            # all columns in the row are EMPTY. So this is why this works.
+            # all cells in the row are EMPTY. So this is why this works.
             if board[row][0] != EMPTY:
-                return board[row][0]
+                return board[row][0]  # Returns X or O
 
-    return False
-
-
-def check_cols(board):
-    cols = len(board)
+    cols = len(board[0])
     for col in range(cols):
         if board[0][col] == board[1][col] == board[2][col]:
             # Automatically, we know all are the same. So if one is EMPTY
             # all cells in the column are EMPTY. So this is why this works.
             if board[0][col] != EMPTY:
-                return board[0][col]
+                return board[0][col]  # Returns X or O
 
-    return False
-
-
-def check_diagonals(board):
-    # Once again, we know if there is a diagonal member
+    # Once again, we know if there is a diagonal winner
     # then the diagonal will either be all X or all Y
-
-    # Thus, we can safely check if the first one we check
-    # (board[0][0] or board[2][0]) is not EMPTY and be
-    # assured all else in the current diagonal != empty
     if board[0][0] == board[1][1] == board[2][2]:
         if board[0][0] != EMPTY:
-            return board[0][0]
+            return board[0][0]  # Returns X or O
+
     if board[2][0] == board[1][1] == board[0][2]:
         if board[2][0] != EMPTY:
-            return board[2][0]
-
-    return False
-
-
-def winner(board):
-    """
-    Returns the winner of the game, if there is one.
-    """
-
-    # Each should return the winner, or False if no winner
-    horizontal_winner = check_rows(board)
-    if horizontal_winner:
-        return horizontal_winner
-
-    vertical_winner = check_cols(board)
-    if vertical_winner:
-        return vertical_winner
-
-    diagonal_winner = check_diagonals(board)
-    if diagonal_winner:
-        return diagonal_winner
+            return board[2][0]  # Returns X or O
 
     return None
 
@@ -151,13 +122,16 @@ def terminal(board):
     if winner(board) != None:
         return True
 
+    rows = len(board)
+    cols = len(board[0])
+
     # checking if there are any empty cells; if so, return false - game still in progress
-    for row in range(3):
-        for col in range(3):
+    for row in range(rows):
+        for col in range(cols):
             if board[row][col] == EMPTY:
                 return False
 
-     # if there are no more empty cells; theres a tie and game's over
+    # if there are no more empty cells; theres a tie and game's over
     return True
 
 
@@ -165,17 +139,17 @@ def score(board):
     """
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
     """
-    
-    if winner(board)  == X: 
+
+    if winner(board) == X:
         return 1
-    elif winner(board)  == O: 
-        return -1 
-    else: 
+    elif winner(board) == O:
+        return -1
+    else:
         return 0
 
 
 def max_value(board):
-   
+
     if terminal(board):
         return score(board)
     v = -math.inf
@@ -183,6 +157,7 @@ def max_value(board):
     for action in actions(board):
         v = max(v, min_value(result(board, action)))
     return v
+
 
 def min_value(board):
     if terminal(board):
@@ -193,10 +168,11 @@ def min_value(board):
         v = min(v, max_value(result(board, action)))
     return v
 
+
 def minimax(board):
-   """
+    """
     Returns the optimal action for the current player on the board.
-"""
+    """
     if terminal(board):
         return None
 
