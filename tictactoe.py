@@ -147,63 +147,61 @@ def score(board):
     else:
         return 0
 
-
-def max_value(board):
-
-    if terminal(board):
-        return score(board)
-    v = -math.inf
-
-    for action in actions(board):
-        v = max(v, min_value(result(board, action)))
-    return v
-
-
-def min_value(board):
-    if terminal(board):
-        return score(board)
-    v = math.inf
-
-    for action in actions(board):
-        v = min(v, max_value(result(board, action)))
-    return v
-
-
 def minimax(board):
     """
-    Returns the optimal action for the current player on the board.
+    Returns the optimal action for the current player on the board using the minimax algorithm.
     """
 
-    """
-    Psuedocode as described by professor:
-    
-    Def minimax(board):
-        Def max_function(state):
-            score = max(score, min_function(results(state, actions)))
-            Return score
-            
-        Def min_function(state):
-            Return score
-    """
+    def max_value(board):
+        """
+        Helper function for the minimax algorithm that returns the maximum score for the current player 
+        based on the possible actions that can be taken on the board.
+        """
+        if terminal(board):  # if the game has ended
+            return score(board)  # return the score of the final board state
+        v = -math.inf  # initialize v as negative infinity
 
-    if terminal(board):
-        return None
-
-    best_action = None
-
-    if player(board) == X:
-        max_v = -math.inf
+        # iterate over all possible actions that can be taken on the board
         for action in actions(board):
+            # update v as the maximum of v and the minimum value obtained by considering the result of applying the action
+            v = max(v, min_value(result(board, action)))
+        return v
+
+    def min_value(board):
+        """
+        Helper function for the minimax algorithm that returns the minimum score for the current player 
+        based on the possible actions that can be taken on the board.
+        """
+        if terminal(board):  # if the game has ended
+            return score(board)  # return the score of the final board state
+        v = math.inf  # initialize v as positive infinity
+
+        # iterate over all possible actions that can be taken on the board
+        for action in actions(board):
+            # update v as the minimum of v and the maximum value obtained by considering the result of applying the action
+            v = min(v, max_value(result(board, action)))
+        return v
+
+    if terminal(board):  # if the game has ended
+        return None  # return None because there are no valid actions left to take
+
+    best_action = None  # initialize the best action as None
+
+    if player(board) == X:  # if it is the maximizing player's turn
+        max_v = -math.inf  # initialize the maximum score as negative infinity
+        for action in actions(board):
+            # update the maximum score and best action if a higher score is found by considering the result of applying the action
             v = min_value(result(board, action))
             if v > max_v:
                 max_v = v
                 best_action = action
-    else:
-        min_v = math.inf
+    else:  # if it is the minimizing player's turn
+        min_v = math.inf  # initialize the minimum score as positive infinity
         for action in actions(board):
+            # update the minimum score and best action if a lower score is found by considering the result of applying the action
             v = max_value(result(board, action))
             if v < min_v:
                 min_v = v
                 best_action = action
 
-    return best_action
+    return best_action  # return the best action found by the minimax algorithm
