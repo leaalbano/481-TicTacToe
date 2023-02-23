@@ -1,5 +1,6 @@
 """
 Tic Tac Toe Player
+group names: Daniel Cazarez, Jennah Kanan, Lea Albano, Aditya Shah 
 """
 
 import math
