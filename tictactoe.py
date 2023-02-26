@@ -15,6 +15,7 @@ def initial_state():
     """
     Returns starting state of the board.
     """
+    #returns a 3x3 nested list that initializes a game board at the start of the game
     return [[EMPTY, EMPTY, EMPTY],
             [EMPTY, EMPTY, EMPTY],
             [EMPTY, EMPTY, EMPTY]]
@@ -65,7 +66,7 @@ def result(board, action):
     """
     possible_actions = actions(board)
     if action not in possible_actions:
-        # Invalid action was passed in
+        # Raise an exception if a invalid action was passed in
         raise Exception(f'{action} is not a valid action.')
 
     row, col = action
@@ -140,7 +141,7 @@ def score(board):
     """
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
     """
-
+    #If the winner of the game is player X, the function returns 1. If the winner is player O, the function returns -1. If there is no winner (the game is a tie or still ongoing), the function returns 0.
     if winner(board) == X:
         return 1
     elif winner(board) == O:
